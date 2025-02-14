@@ -113,7 +113,7 @@ services:
     depends_on:
       - keycloak
     environment:
-      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_URL=http://10.1.1.10:3000
       - KEYCLOAK_ID=posoidc
       - KEYCLOAK_SECRET=2mkposoidc
       - KEYCLOAK_ISSUER=http://10.1.1.10:8082/auth/realms/demo
