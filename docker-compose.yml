@@ -104,6 +104,25 @@ services:
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
     command: start-dev
 
+  app1:
+    build:
+      context: ./apps/app1
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - keycloak
+    environment:
+      - NEXTAUTH_URL=http://localhost:3000
+      - KEYCLOAK_ID=posoidc
+      - KEYCLOAK_SECRET=2mkposoidc
+      - KEYCLOAK_ISSUER=http://10.1.1.10:8082/auth/realms/demo
+      - NEXTAUTH_SECRET=2mkposoidc
+    networks:
+      - net
+    volumes:
+       - app1_node_modules:/app/node_modules # Persist node_modules
+
 networks:
   net:
     driver: bridge
@@ -112,4 +131,4 @@ volumes:
   midpoint_data:
   ldap_conf:
   ldap_data:
-
+  app1_node_modules:
